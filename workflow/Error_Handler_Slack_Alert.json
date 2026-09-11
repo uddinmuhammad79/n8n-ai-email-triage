@@ -1,0 +1,70 @@
+{
+  "name": "Error Handler — Slack Alert",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "581309f3-565d-4eb0-b5b2-e8bef12b94b1",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "n8n-failures",
+          "mode": "name"
+        },
+        "text": "=⚠️ Workflow error in *{{ $json.workflow.name }}* Node: {{ $json.execution.lastNodeExecuted }} Error: {{ $json.execution.error.message }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d8c1d4e8-d6a5-4cd5-8f19-f5285a608532",
+      "name": "Send a message",
+      "webhookId": "fe37ada4-02a3-4b56-8bd3-9c879e58b956",
+      "credentials": {
+        "slackApi": {
+          "id": "hiiPtld1HF9L69tv",
+          "name": "Slack account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "0bfd1380-bbcc-463d-a9d7-e4f18115315b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e494f498d2ecc4fdd2b4aed4f6bf30816a7ec222bb7db5fb9bf0f544a320446c"
+  },
+  "nodeGroups": [],
+  "id": "H29UMLieEfyny6YK",
+  "tags": []
+}
